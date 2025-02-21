@@ -1,13 +1,11 @@
 @extends('layouts.master')
 
-@section('title', 'Meu Painel')
+@section('title', 'Produtos')
 
 @section('content_header')
     <div class="row">
         <span style="float: none">
-            <button class="btn btn-success" type="button">
-                Novo
-            </button>
+            <a href="{{ route('product.create') }}" class="btn btn-success">Novo</a>
         </span>
         <span style="float: inline-start">
             <h1>Produtos Cadastrados</h1>
@@ -16,15 +14,36 @@
 @stop
 
 @section('content')
+    @include('includes.alerts')
     <div class="card">
         <table class="table table-houver table-bordered">
-            <tr>
-                <th>#</th>
-                <th>Descrição</th>
-                <th>Slug</th>
-                <th>Preço</th>
-            </tr>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Descrição</th>
+                    <th>Slug</th>
+                    <th class="text-center">Preço</th>
+                    <th class="text-center">Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($products as $product)
+                    <tr>
+                        <td>{{ $product->id }}</td>
+                        <td>{{ $product->description }}</td>
+                        <td>{{ $product->slug }}</td>
+                        <td style="text-align: right;">{{ formatQtd($product->price) }}</td>
+                        <td class="text-center">
+                            <button class="btn btn-primary">
+                                Editar
+                            </button>
+                            <button class="btn btn-danger">
+                                Excluir
+                            </button>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
         </table>
     </div>
-
 @stop
