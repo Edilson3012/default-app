@@ -34,6 +34,9 @@
                         <td>{{ $product->slug }}</td>
                         <td style="text-align: right;">{{ formatQtd($product->price) }}</td>
                         <td class="text-center">
+                            <a class="btn btn-info" href="{{ route('product.show', $product->id) }}">
+                                Ver
+                            </a>
                             <a class="btn btn-primary" href="{{ route('product.edit', $product->id) }}">
                                 Editar
                             </a>
