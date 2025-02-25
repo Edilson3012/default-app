@@ -64,9 +64,6 @@ class ProductController extends Controller
         }
     }
 
-    /**
-     * Valida os dados do produto.
-     */
     private function validateProduct(Request $request)
     {
         return $request->validate([
@@ -78,5 +75,21 @@ class ProductController extends Controller
             'price.required' => 'O preço é obrigatório!',
             'price.regex' => 'Formato de preço inválido! Exemplo válido: 1.234,56',
         ]);
+    }
+
+    public function destroy(Product $product)
+    {
+        try {
+            $product->delete();
+            return redirect()->route('product.index')->with([
+                'type' => 'success',
+                'message' => 'Registro excluído com sucesso!'
+            ]);
+        } catch (\Throwable $ex) {
+            return redirect()->back()->with([
+                'type' => 'error',
+                'message' => 'Erro ao excluir: ' . $ex->getMessage(),
+            ]);
+        }
     }
 }

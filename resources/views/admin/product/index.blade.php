@@ -37,7 +37,8 @@
                             <a class="btn btn-primary" href="{{ route('product.edit', $product->id) }}">
                                 Editar
                             </a>
-                            <button class="btn btn-danger">
+                            <button type="button" class="btn btn-danger"
+                                onclick="confirmDelete({{ $product->id }}, '{{ $product->description }}')">
                                 Excluir
                             </button>
                         </td>
@@ -46,4 +47,39 @@
             </tbody>
         </table>
     </div>
+    <script>
+        function confirmDelete(productId, productName) {
+            Swal.fire({
+                title: "Tem certeza?",
+                text: `Deseja excluir o produto "${productName}"? Esta ação não pode ser desfeita.`,
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#d33",
+                cancelButtonColor: "#3085d6",
+                confirmButtonText: "Sim, excluir!",
+                cancelButtonText: "Cancelar"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var form = document.createElement("form");
+                    form.method = "POST";
+                    form.action = "/admin/product/" + productId;
+
+                    var csrfToken = document.createElement("input");
+                    csrfToken.type = "hidden";
+                    csrfToken.name = "_token";
+                    csrfToken.value = "{{ csrf_token() }}";
+                    form.appendChild(csrfToken);
+
+                    var methodInput = document.createElement("input");
+                    methodInput.type = "hidden";
+                    methodInput.name = "_method";
+                    methodInput.value = "DELETE";
+                    form.appendChild(methodInput);
+
+                    document.body.appendChild(form);
+                    form.submit();
+                }
+            });
+        }
+    </script>
 @stop
