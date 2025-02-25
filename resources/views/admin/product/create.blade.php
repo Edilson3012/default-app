@@ -14,27 +14,9 @@
 @stop
 
 @section('content')
-@include('includes.alerts')
+    @include('includes.alerts')
     <div class="card">
-
         <div class="card-body">
-            {{-- <form action="{{ route('product.store') }}" method="POST">
-                @csrf
-                <fieldset class="row">
-                    <div class="mb-3 col-4">
-                        <label for="description" class="form-label">Descrição</label>
-                        <input type="text" id="description" name="description" class="form-control" required placeholder="Descrição">
-                    </div>
-                    <div class="mb-3 col-4">
-                        <label for="price" class="form-label">Preço R$</label>
-                        <input type="text" oninput="formatarNumeroAutomaticoDecimal(this)" id="price" name="price"
-                            class="form-control" required placeholder="0,00">
-                    </div>
-                </fieldset>
-                <fieldset>
-                    <button type="submit" class="btn btn-success">Salvar</button>
-                </fieldset>
-            </form> --}}
             <form action="{{ route('product.store') }}" method="POST">
                 @csrf
                 <fieldset class="row">
@@ -66,20 +48,7 @@
                     <button type="submit" class="btn btn-success">Salvar</button>
                 </fieldset>
             </form>
-
-            <!-- Exibir erros com SweetAlert2 -->
-            @if ($errors->any())
-                <script>
-                    Swal.fire({
-                        title: 'Erro!',
-                        html: '{!! implode('<br>', $errors->all()) !!}',
-                        icon: 'error',
-                        confirmButtonText: 'OK'
-                    });
-                </script>
-            @endif
-
         </div>
     </div>
-    <script src="{{ asset('utilitities/functionsJS.js') }}"></script>
+
 @stop

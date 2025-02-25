@@ -6,3 +6,9 @@ if (!function_exists('formatQtd')) {
         return number_format($value, $count, ',', '.');
     }
 }
+if (!function_exists('formatPrie')) {
+    function formatPrice(string $price): float
+    {
+        return (float) str_replace(['.', ','], ['', '.'], $price);
+    }
+}

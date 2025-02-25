@@ -51,6 +51,7 @@
 
     </div>
 @stop
+<script src="{{ asset('utilitities/functionsJS.js') }}"></script>
 
 @section('adminlte_js')
     @stack('js')

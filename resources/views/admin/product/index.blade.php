@@ -34,9 +34,9 @@
                         <td>{{ $product->slug }}</td>
                         <td style="text-align: right;">{{ formatQtd($product->price) }}</td>
                         <td class="text-center">
-                            <button class="btn btn-primary">
+                            <a class="btn btn-primary" href="{{ route('product.edit', $product->id) }}">
                                 Editar
-                            </button>
+                            </a>
                             <button class="btn btn-danger">
                                 Excluir
                             </button>
